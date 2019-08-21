@@ -72,6 +72,10 @@ const createDwarf = async()=>{
             },
         });
 
+        const deletedJson = await rawResponse.json();
+
+        console.log(`Dwarf is alive ${deletedJson.deletedDwarf.isAlive}`); 
+        image.setAttribute("src", "gimli_dead.jpg");
     });
 }    
 
