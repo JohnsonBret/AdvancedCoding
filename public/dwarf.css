@@ -1,0 +1,17 @@
+main{
+    display: flex;
+    flex-wrap: wrap;
+    color: #fff;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    background-color: darkblue;
+    width: 30%;
+    align-items: center;
+}
+
+.card img{
+    width: 80%;
+}
