@@ -59,6 +59,16 @@ const createDwarf = async()=>{
         let foodText = `Food Level: ${patchedJson.updatedDwarf.foodLevel}`
         foodLevel.innerHTML = foodText;
 
+        let foodNumber = parseInt(patchedJson.updatedDwarf.foodLevel);
+
+        if(foodNumber == 10)
+        {
+            image.setAttribute("src", "fat_dwarf.gif");
+            let fatText = document.createElement("p");
+            card.appendChild(fatText);
+            fatText.innerHTML = "Fat Boi";
+        }
+
     });
 
     slayButton.addEventListener("click", async()=>{
@@ -77,6 +87,23 @@ const createDwarf = async()=>{
         console.log(`Dwarf is alive ${deletedJson.deletedDwarf.isAlive}`); 
         image.setAttribute("src", "gimli_dead.jpg");
     });
+
+    setInterval(async ()=>{
+        console.log("Send Ajax");
+
+        const rawResponse = await fetch(`/hunger/${responseJson.dwarf._id}`, {
+            method: 'PATCH',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+        });
+
+        const patchedJson = await rawResponse.json();
+        console.log(patchedJson.updatedDwarf.foodLevel);
+        foodLevel.innerHTML = patchedJson.updatedDwarf.foodLevel;
+
+    }, 10000);
 }    
 
 let createDwarfButton = document.getElementById("create");

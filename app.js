@@ -54,6 +54,28 @@ app.patch('/feed/:id', async (req, res)=>{
     res.status(200).send({updatedDwarf});
 });
 
+app.patch('/hunger/:id', async (req, res)=>{
+    console.log(`Dwarf ${req.params.id} got Hungry`);
+
+    try{
+    const foundDwarf = await Dwarf.find({_id: req.params.id});
+    const foundDwarfFood = parseInt(foundDwarf[0].foodLevel);
+
+    const updatedDwarf = await Dwarf.findOneAndUpdate({
+        _id: req.params.id
+    },{
+        foodLevel: foundDwarfFood - 1
+    }, {new: true},);
+
+    res.status(200).send({updatedDwarf});
+
+    }
+    catch(e){
+
+    }
+    
+});
+
 app.delete('/slay/:id', async(req, res)=>{
     console.log(`Slew the dwarf ${req.params.id}`);
 
